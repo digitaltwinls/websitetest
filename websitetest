@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Ball Tapping Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .ball {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            animation: move 3s infinite linear;
+        }
+
+        @keyframes move {
+            from { left: 0; top: 0; }
+            to { left: calc(100% - 50px); top: calc(100% - 50px); }
+        }
+
+        .score {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="ball" id="ball"></div>
+
+    <script>
+        let score = 0;
+
+        const ball = document.getElementById('ball');
+        const scoreDisplay = document.getElementById('score');
+
+        function randomPosition() {
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 50);
+            ball.style.left = `${x}px`;
+            ball.style.top = `${y}px`;
+        }
+
+        ball.addEventListener('click', () => {
+            score++;
+            scoreDisplay.textContent = score;
+            randomPosition();
+        });
+
+        // Initial random position of the ball
+        randomPosition();
+    </script>
+
+</body>
+</html>
